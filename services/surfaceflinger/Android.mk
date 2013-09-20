@@ -41,8 +41,9 @@ ifneq ($(NUM_FRAMEBUFFER_SURFACE_BUFFERS),)
   LOCAL_CFLAGS += -DNUM_FRAMEBUFFER_SURFACE_BUFFERS=$(NUM_FRAMEBUFFER_SURFACE_BUFFERS)
 endif
 
- # HWComposer.cpp contains 2 pretty bad aliasing violations
- LOCAL_CFLAGS += -fno-strict-aliasing
+ifeq ($(BOARD_ADRENO_DECIDE_TEXTURE_TARGET),true)
+    LOCAL_CFLAGS += -DDECIDE_TEXTURE_TARGET
+endif
 
 LOCAL_SHARED_LIBRARIES := \
 	libcutils \
